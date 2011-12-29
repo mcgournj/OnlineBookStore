@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  author: MyString
+  publisher: MyString
+  yearPublished: MyString
+  edition: MyString
+  volume: MyString
+  ISBN: MyString
+  price: 9.99
+
+two:
+  title: MyString
+  author: MyString
+  publisher: MyString
+  yearPublished: MyString
+  edition: MyString
+  volume: MyString
+  ISBN: MyString
+  price: 9.99

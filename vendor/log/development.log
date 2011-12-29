@@ -1,0 +1,1188 @@
+  [1m[36mSQL (4.8ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (107.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (17.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.8ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreateCustomers (20111027215543)
+  [1m[36mSQL (2.4ms)[0m  [1mCREATE TABLE "customers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "firstname" varchar(255), "lastname" varchar(255), "email" varchar(255), "phone" varchar(255), "password" varchar(255), "address_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111027215543')
+Migrating to CreateAddresses (20111027215552)
+  [1m[36mSQL (2.3ms)[0m  [1mCREATE TABLE "addresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address1" varchar(255), "address2" varchar(255), "town" varchar(255), "county" varchar(255), "country" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111027215552')
+Migrating to CreateOrders (20111027215601)
+  [1m[36mSQL (5.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.9ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+Migrating to CreateCustomers (20111027215543)
+Migrating to CreateAddresses (20111027215552)
+Migrating to CreateOrders (20111027215601)
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (4.7ms)[0m  [1mCREATE TABLE "orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_id" integer, "salesTax" decimal, "shippingFee" decimal, "total" decimal, "methodOfPayment" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111027215601')
+Migrating to CreateOrderitems (20111027215610)
+  [1m[36mSQL (2.8ms)[0m  [1mCREATE TABLE "orderitems" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "order_id" integer, "book_id" integer, "quantity" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111027215610')
+Migrating to CreateBooks (20111027215619)
+  [1m[36mSQL (4.0ms)[0m  [1mCREATE TABLE "books" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "author" varchar(255), "publisher" varchar(255), "yearPublished" varchar(255), "edition" varchar(255), "volume" varchar(255), "ISBN" varchar(255), "price" decimal, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (7.9ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111027215619')
+Migrating to CreateCategories (20111027215628)
+  [1m[36mSQL (4.7ms)[0m  [1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "book_id" integer, "categoryName" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111027215628')
+  [1m[36mSQL (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35mSQL (3.5ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (1.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mPRAGMA index_list("addresses")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("books")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("categories")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("customers")
+  [1m[36mSQL (0.2ms)[0m  [1mPRAGMA index_list("orderitems")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("orders")
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from service at /usr/lib/ruby/1.8/webrick/httpserver.rb:104)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:12:38 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (11.6ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 270ms (Views: 39.3ms | ActiveRecord: 11.6ms)
+
+
+Started GET "/customer" for 127.0.0.1 at Thu Oct 27 23:12:51 +0100 2011
+
+ActionController::RoutingError (No route matches "/customer"):
+  
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.8ms)
+
+
+Started GET "/customers" for 127.0.0.1 at Thu Oct 27 23:12:58 +0100 2011
+  Processing by CustomersController#index as HTML
+  [1m[35mCustomer Load (4.2ms)[0m  SELECT "customers".* FROM "customers"
+Rendered customers/index.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 109ms (Views: 43.6ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/customers/new" for 127.0.0.1 at Thu Oct 27 23:13:01 +0100 2011
+  Processing by CustomersController#new as HTML
+Rendered customers/_form.html.erb (49.4ms)
+Rendered customers/new.html.erb within layouts/application (72.6ms)
+Completed 200 OK in 121ms (Views: 104.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/customers" for 127.0.0.1 at Thu Oct 27 23:14:30 +0100 2011
+  Processing by CustomersController#create as HTML
+  Parameters: {"commit"=>"Create Customer", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "customer"=>{"lastname"=>"McCarthy", "address_id"=>"1", "firstname"=>"John ", "phone"=>"083 4342009", "password"=>"[FILTERED]", "email"=>"jonathan.mccarthy@ncirl.ie"}}
+  [1m[36mSQL (1.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mAREL (3.9ms)[0m  INSERT INTO "customers" ("email", "firstname", "lastname", "password", "phone", "updated_at", "created_at", "address_id") VALUES ('jonathan.mccarthy@ncirl.ie', 'John ', 'McCarthy', 'letmein', '083 4342009', '2011-10-27 22:14:30.837653', '2011-10-27 22:14:30.837653', 1)
+Redirected to http://0.0.0.0:3000/customers/1
+Completed 302 Found in 144ms
+
+
+Started GET "/customers/1" for 127.0.0.1 at Thu Oct 27 23:14:31 +0100 2011
+  Processing by CustomersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomer Load (1.6ms)[0m  [1mSELECT "customers".* FROM "customers" WHERE "customers"."id" = 1 LIMIT 1[0m
+Rendered customers/show.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 80ms (Views: 50.0ms | ActiveRecord: 6.8ms)
+
+
+Started GET "/customers" for 127.0.0.1 at Thu Oct 27 23:14:34 +0100 2011
+  Processing by CustomersController#index as HTML
+  [1m[35mCustomer Load (3.1ms)[0m  SELECT "customers".* FROM "customers"
+Rendered customers/index.html.erb within layouts/application (22.7ms)
+Completed 200 OK in 68ms (Views: 51.2ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/addresses" for 127.0.0.1 at Thu Oct 27 23:14:45 +0100 2011
+  Processing by AddressesController#index as HTML
+  [1m[36mAddress Load (2.3ms)[0m  [1mSELECT "addresses".* FROM "addresses"[0m
+Rendered addresses/index.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 66ms (Views: 48.0ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/addresses/new" for 127.0.0.1 at Thu Oct 27 23:14:50 +0100 2011
+  Processing by AddressesController#new as HTML
+Rendered addresses/_form.html.erb (29.0ms)
+Rendered addresses/new.html.erb within layouts/application (50.6ms)
+Completed 200 OK in 101ms (Views: 88.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/addresses" for 127.0.0.1 at Thu Oct 27 23:15:37 +0100 2011
+  Processing by AddressesController#create as HTML
+  Parameters: {"address"=>{"address1"=>"43 Oversite Coast", "address2"=>"", "country"=>"Eire", "county"=>"Kildare", "town"=>"Naas"}, "commit"=>"Create Address", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (3.6ms)[0m  INSERT INTO "addresses" ("updated_at", "country", "town", "address2", "county", "created_at", "address1") VALUES ('2011-10-27 22:15:37.648252', 'Eire', 'Naas', '', 'Kildare', '2011-10-27 22:15:37.648252', '43 Oversite Coast')
+Redirected to http://0.0.0.0:3000/addresses/1
+Completed 302 Found in 96ms
+
+
+Started GET "/addresses/1" for 127.0.0.1 at Thu Oct 27 23:15:37 +0100 2011
+  Processing by AddressesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAddress Load (1.5ms)[0m  [1mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = 1 LIMIT 1[0m
+Rendered addresses/show.html.erb within layouts/application (17.8ms)
+Completed 200 OK in 82ms (Views: 59.6ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/addresses" for 127.0.0.1 at Thu Oct 27 23:15:45 +0100 2011
+  Processing by AddressesController#index as HTML
+  [1m[35mAddress Load (2.5ms)[0m  SELECT "addresses".* FROM "addresses"
+Rendered addresses/index.html.erb within layouts/application (16.1ms)
+Completed 200 OK in 67ms (Views: 46.1ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:32:23 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (7.8ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 87ms (Views: 46.2ms | ActiveRecord: 7.8ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:32:26 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (41.4ms)
+Rendered books/new.html.erb within layouts/application (64.0ms)
+Completed 200 OK in 148ms (Views: 104.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:32:51 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (47.7ms)
+Rendered books/new.html.erb within layouts/application (62.3ms)
+Completed 200 OK in 139ms (Views: 103.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:35:04 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"25.52", "title"=>"Rails 3 Way, The (2nd Edition)", "author"=>"Obie Fernandez", "ISBN"=>"", "yearPublished"=>"2010", "publisher"=>"Addison-Wesley", "volume"=>"2", "edition"=>"second edition"}}
+  [1m[35mAREL (11.5ms)[0m  INSERT INTO "books" ("title", "volume", "updated_at", "publisher", "edition", "yearPublished", "author", "ISBN", "created_at", "price") VALUES ('Rails 3 Way, The (2nd Edition)', '2', '2011-10-27 22:35:04.881930', 'Addison-Wesley', 'second edition', '2010', 'Obie Fernandez', '', '2011-10-27 22:35:04.881930', 25.52)
+Redirected to http://0.0.0.0:3000/books/1
+Completed 302 Found in 154ms
+
+
+Started GET "/books/1" for 127.0.0.1 at Thu Oct 27 23:35:05 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (1.6ms)[0m  [1mSELECT "books".* FROM "books" WHERE "books"."id" = 1 LIMIT 1[0m
+Rendered books/show.html.erb within layouts/application (20.3ms)
+Completed 200 OK in 82ms (Views: 59.8ms | ActiveRecord: 13.1ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:37:30 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (3.0ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (25.1ms)
+Completed 200 OK in 90ms (Views: 70.4ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:37:35 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (36.2ms)
+Rendered books/new.html.erb within layouts/application (53.2ms)
+Completed 200 OK in 108ms (Views: 89.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:39:37 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"23.94", "title"=>"Ruby on Rails 3 Tutorial: Learn Rails by Example", "author"=>"Michael Hartl", "ISBN"=>"", "yearPublished"=>"2010", "publisher"=>"Addison-Wesley", "volume"=>"", "edition"=>"first edition"}}
+  [1m[36mAREL (13.4ms)[0m  [1mINSERT INTO "books" ("yearPublished", "title", "created_at", "volume", "updated_at", "edition", "ISBN", "price", "publisher", "author") VALUES ('2010', 'Ruby on Rails 3 Tutorial: Learn Rails by Example', '2011-10-27 22:39:37.825521', '', '2011-10-27 22:39:37.825521', 'first edition', '', 23.94, 'Addison-Wesley', 'Michael Hartl')[0m
+Redirected to http://0.0.0.0:3000/books/2
+Completed 302 Found in 192ms
+
+
+Started GET "/books/2" for 127.0.0.1 at Thu Oct 27 23:39:38 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mBook Load (1.0ms)[0m  SELECT "books".* FROM "books" WHERE "books"."id" = 2 LIMIT 1
+Rendered books/show.html.erb within layouts/application (109.3ms)
+Completed 200 OK in 167ms (Views: 148.9ms | ActiveRecord: 14.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:39:42 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (2.3ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (37.1ms)
+Completed 200 OK in 117ms (Views: 66.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:39:52 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (35.3ms)
+Rendered books/new.html.erb within layouts/application (51.6ms)
+Completed 200 OK in 111ms (Views: 93.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:42:41 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"24.97", "title"=>"Beginning Rails 3 ", "author"=>"Cloves Carneiro Jr. and Rida Al Barazi", "ISBN"=>"", "yearPublished"=>"2009", "publisher"=>"Apress", "volume"=>"", "edition"=>"first edition"}}
+  [1m[35mAREL (5.3ms)[0m  INSERT INTO "books" ("updated_at", "edition", "publisher", "title", "author", "ISBN", "created_at", "price", "volume", "yearPublished") VALUES ('2011-10-27 22:42:42.098097', 'first edition', 'Apress', 'Beginning Rails 3 ', 'Cloves Carneiro Jr. and Rida Al Barazi', '', '2011-10-27 22:42:42.098097', 24.97, '', '2009')
+Redirected to http://0.0.0.0:3000/books/3
+Completed 302 Found in 175ms
+
+
+Started GET "/books/3" for 127.0.0.1 at Thu Oct 27 23:42:42 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mBook Load (2.0ms)[0m  [1mSELECT "books".* FROM "books" WHERE "books"."id" = 3 LIMIT 1[0m
+Rendered books/show.html.erb within layouts/application (20.7ms)
+Completed 200 OK in 72ms (Views: 53.7ms | ActiveRecord: 7.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:44:11 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (2.9ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (30.8ms)
+Completed 200 OK in 180ms (Views: 160.9ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:44:15 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (41.7ms)
+Rendered books/new.html.erb within layouts/application (59.0ms)
+Completed 200 OK in 127ms (Views: 90.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:46:23 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"26.37", "title"=>"Rails 3 in Action", "author"=>"Ryan Bigg and Yehuda Katz", "ISBN"=>"", "yearPublished"=>"2011", "publisher"=>"Pragmatic Bookshelf", "volume"=>"", "edition"=>"fourth edition"}}
+  [1m[36mAREL (3.6ms)[0m  [1mINSERT INTO "books" ("volume", "yearPublished", "updated_at", "author", "publisher", "ISBN", "title", "edition", "price", "created_at") VALUES ('', '2011', '2011-10-27 22:46:23.350180', 'Ryan Bigg and Yehuda Katz', 'Pragmatic Bookshelf', '', 'Rails 3 in Action', 'fourth edition', 26.37, '2011-10-27 22:46:23.350180')[0m
+Redirected to http://0.0.0.0:3000/books/4
+Completed 302 Found in 118ms
+
+
+Started GET "/books/4" for 127.0.0.1 at Thu Oct 27 23:46:23 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mBook Load (1.3ms)[0m  SELECT "books".* FROM "books" WHERE "books"."id" = 4 LIMIT 1
+Rendered books/show.html.erb within layouts/application (16.6ms)
+Completed 200 OK in 70ms (Views: 51.0ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:46:28 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (8.8ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (41.6ms)
+Completed 200 OK in 93ms (Views: 70.1ms | ActiveRecord: 8.8ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:46:38 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (50.1ms)
+Rendered books/new.html.erb within layouts/application (70.4ms)
+Completed 200 OK in 136ms (Views: 108.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:50:23 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"43.54", "title"=>"Agile Web Development with Rails", "author"=>"Sam Ruby, Dave Thomas and David Heinemeier Hansson", "ISBN"=>"", "yearPublished"=>"2011", "publisher"=>"Pragmatic Programmers", "volume"=>"", "edition"=>"third edition"}}
+  [1m[35mAREL (3.6ms)[0m  INSERT INTO "books" ("publisher", "updated_at", "price", "yearPublished", "ISBN", "created_at", "volume", "title", "author", "edition") VALUES ('Pragmatic Programmers', '2011-10-27 22:50:23.200212', 43.54, '2011', '', '2011-10-27 22:50:23.200212', '', 'Agile Web Development with Rails', 'Sam Ruby, Dave Thomas and David Heinemeier Hansson', 'third edition')
+Redirected to http://0.0.0.0:3000/books/5
+Completed 302 Found in 120ms
+
+
+Started GET "/books/5" for 127.0.0.1 at Thu Oct 27 23:50:23 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mBook Load (5.8ms)[0m  [1mSELECT "books".* FROM "books" WHERE "books"."id" = 5 LIMIT 1[0m
+Rendered books/show.html.erb within layouts/application (27.6ms)
+Completed 200 OK in 85ms (Views: 53.7ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:51:58 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (7.2ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (38.7ms)
+Completed 200 OK in 112ms (Views: 77.8ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:52:01 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (42.2ms)
+Rendered books/new.html.erb within layouts/application (56.1ms)
+Completed 200 OK in 109ms (Views: 92.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:54:16 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"50.00", "title"=>"Rails Recipes: Rails 3 Edition", "author"=>"Chad Fowler", "ISBN"=>"", "yearPublished"=>"2011", "publisher"=>"Pragmatic", "volume"=>"", "edition"=>"first edition"}}
+  [1m[36mAREL (5.2ms)[0m  [1mINSERT INTO "books" ("price", "author", "publisher", "volume", "created_at", "edition", "updated_at", "yearPublished", "title", "ISBN") VALUES (50.0, 'Chad Fowler', 'Pragmatic', '', '2011-10-27 22:54:17.212930', 'first edition', '2011-10-27 22:54:17.212930', '2011', 'Rails Recipes: Rails 3 Edition', '')[0m
+Redirected to http://0.0.0.0:3000/books/6
+Completed 302 Found in 119ms
+
+
+Started GET "/books/6" for 127.0.0.1 at Thu Oct 27 23:54:17 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mBook Load (1.9ms)[0m  SELECT "books".* FROM "books" WHERE "books"."id" = 6 LIMIT 1
+Rendered books/show.html.erb within layouts/application (20.0ms)
+Completed 200 OK in 80ms (Views: 57.0ms | ActiveRecord: 7.1ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:54:45 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (8.2ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (44.2ms)
+Completed 200 OK in 111ms (Views: 78.3ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:54:47 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (35.7ms)
+Rendered books/new.html.erb within layouts/application (59.6ms)
+Completed 200 OK in 132ms (Views: 103.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:56:29 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"39.99", "title"=>"Service-Oriented Design with Ruby and Rails", "author"=>"Paul Dix", "ISBN"=>"", "yearPublished"=>"2010", "publisher"=>"Addison-Wesley", "volume"=>"", "edition"=>"first edition"}}
+  [1m[35mAREL (9.6ms)[0m  INSERT INTO "books" ("volume", "title", "updated_at", "ISBN", "edition", "price", "publisher", "author", "yearPublished", "created_at") VALUES ('', 'Service-Oriented Design with Ruby and Rails', '2011-10-27 22:56:29.629009', '', 'first edition', 39.99, 'Addison-Wesley', 'Paul Dix', '2010', '2011-10-27 22:56:29.629009')
+Redirected to http://0.0.0.0:3000/books/7
+Completed 302 Found in 143ms
+
+
+Started GET "/books/7" for 127.0.0.1 at Thu Oct 27 23:56:29 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mBook Load (5.0ms)[0m  [1mSELECT "books".* FROM "books" WHERE "books"."id" = 7 LIMIT 1[0m
+Rendered books/show.html.erb within layouts/application (24.6ms)
+Completed 200 OK in 87ms (Views: 57.9ms | ActiveRecord: 14.6ms)
+
+
+Started GET "/books" for 127.0.0.1 at Thu Oct 27 23:56:33 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (23.9ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (129.5ms)
+Completed 200 OK in 298ms (Views: 224.7ms | ActiveRecord: 23.9ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Thu Oct 27 23:56:36 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (39.6ms)
+Rendered books/new.html.erb within layouts/application (57.9ms)
+Completed 200 OK in 110ms (Views: 86.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Thu Oct 27 23:57:49 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"35.00", "title"=>"Rails AntiPatterns: Best Practice Ruby on Rails Refactoring", "author"=>"Chad Pytel and Tammer Saleh", "ISBN"=>"", "yearPublished"=>"2010", "publisher"=>"Addison-Wesley", "volume"=>"", "edition"=>"first edition"}}
+  [1m[36mAREL (3.4ms)[0m  [1mINSERT INTO "books" ("yearPublished", "publisher", "author", "price", "volume", "edition", "updated_at", "created_at", "title", "ISBN") VALUES ('2010', 'Addison-Wesley', 'Chad Pytel and Tammer Saleh', 35.0, '', 'first edition', '2011-10-27 22:57:49.814579', '2011-10-27 22:57:49.814579', 'Rails AntiPatterns: Best Practice Ruby on Rails Refactoring', '')[0m
+Redirected to http://0.0.0.0:3000/books/8
+Completed 302 Found in 151ms
+
+
+Started GET "/books/8" for 127.0.0.1 at Thu Oct 27 23:57:50 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mBook Load (1.6ms)[0m  SELECT "books".* FROM "books" WHERE "books"."id" = 8 LIMIT 1
+Rendered books/show.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 80ms (Views: 58.9ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:02:28 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (3.4ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (190.5ms)
+Completed 200 OK in 249ms (Views: 229.9ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:02:29 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (20.1ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (54.0ms)
+Completed 200 OK in 181ms (Views: 109.0ms | ActiveRecord: 20.1ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Fri Oct 28 00:02:32 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (150.6ms)
+Rendered books/new.html.erb within layouts/application (170.5ms)
+Completed 200 OK in 230ms (Views: 209.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Fri Oct 28 00:03:11 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"47.99", "title"=>"Eloquent Ruby", "author"=>"Russ Olsen", "ISBN"=>"", "yearPublished"=>"2011", "publisher"=>"Addison-Wesley", "volume"=>"", "edition"=>"second edition"}}
+  [1m[36mAREL (4.1ms)[0m  [1mINSERT INTO "books" ("volume", "yearPublished", "title", "created_at", "updated_at", "author", "publisher", "edition", "ISBN", "price") VALUES ('', '2011', 'Eloquent Ruby', '2011-10-27 23:03:11.494234', '2011-10-27 23:03:11.494234', 'Russ Olsen', 'Addison-Wesley', 'second edition', '', 47.99)[0m
+Redirected to http://0.0.0.0:3000/books/9
+Completed 302 Found in 115ms
+
+
+Started GET "/books/9" for 127.0.0.1 at Fri Oct 28 00:03:11 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[35mBook Load (1.7ms)[0m  SELECT "books".* FROM "books" WHERE "books"."id" = 9 LIMIT 1
+Rendered books/show.html.erb within layouts/application (16.6ms)
+Completed 200 OK in 93ms (Views: 71.9ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:05:26 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (4.7ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (158.6ms)
+Completed 200 OK in 216ms (Views: 195.1ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/books/new" for 127.0.0.1 at Fri Oct 28 00:05:30 +0100 2011
+  Processing by BooksController#new as HTML
+Rendered books/_form.html.erb (38.3ms)
+Rendered books/new.html.erb within layouts/application (69.6ms)
+Completed 200 OK in 126ms (Views: 100.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for 127.0.0.1 at Fri Oct 28 00:06:23 +0100 2011
+  Processing by BooksController#create as HTML
+  Parameters: {"commit"=>"Create Book", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "book"=>{"price"=>"21.95", "title"=>"Rails 3 in a Nutshell", "author"=>"Edward Ocampo-Gooding, John Guenin and Cody Fauser ", "ISBN"=>"", "yearPublished"=>"2009", "publisher"=>"o'Reilly Publishing", "volume"=>"", "edition"=>"second edition"}}
+  [1m[35mAREL (6.1ms)[0m  INSERT INTO "books" ("ISBN", "volume", "updated_at", "created_at", "publisher", "edition", "yearPublished", "title", "author", "price") VALUES ('', '', '2011-10-27 23:06:24.099549', '2011-10-27 23:06:24.099549', 'o''Reilly Publishing', 'second edition', '2009', 'Rails 3 in a Nutshell', 'Edward Ocampo-Gooding, John Guenin and Cody Fauser ', 21.95)
+Redirected to http://0.0.0.0:3000/books/10
+Completed 302 Found in 157ms
+
+
+Started GET "/books/10" for 127.0.0.1 at Fri Oct 28 00:06:24 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mBook Load (1.2ms)[0m  [1mSELECT "books".* FROM "books" WHERE "books"."id" = 10 LIMIT 1[0m
+Rendered books/show.html.erb within layouts/application (28.3ms)
+Completed 200 OK in 82ms (Views: 64.7ms | ActiveRecord: 7.3ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:06:28 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (3.4ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (56.0ms)
+Completed 200 OK in 140ms (Views: 111.4ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/orders" for 127.0.0.1 at Fri Oct 28 00:06:48 +0100 2011
+  Processing by OrdersController#index as HTML
+  [1m[36mOrder Load (2.6ms)[0m  [1mSELECT "orders".* FROM "orders"[0m
+Rendered orders/index.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 86ms (Views: 47.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/orders/new" for 127.0.0.1 at Fri Oct 28 00:06:51 +0100 2011
+  Processing by OrdersController#new as HTML
+Rendered orders/_form.html.erb (41.8ms)
+Rendered orders/new.html.erb within layouts/application (62.5ms)
+Completed 200 OK in 142ms (Views: 116.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/orders" for 127.0.0.1 at Fri Oct 28 00:07:26 +0100 2011
+  Processing by OrdersController#create as HTML
+  Parameters: {"commit"=>"Create Order", "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "order"=>{"salesTax"=>"21", "total"=>"200", "shippingFee"=>"9.95", "methodOfPayment"=>"Credit Card", "customer_id"=>"1"}}
+  [1m[35mAREL (4.6ms)[0m  INSERT INTO "orders" ("updated_at", "customer_id", "shippingFee", "created_at", "total", "methodOfPayment", "salesTax") VALUES ('2011-10-27 23:07:26.311920', 1, 9.95, '2011-10-27 23:07:26.311920', 200.0, 'Credit Card', 21.0)
+Redirected to http://0.0.0.0:3000/orders/1
+Completed 302 Found in 129ms
+
+
+Started GET "/orders/1" for 127.0.0.1 at Fri Oct 28 00:07:26 +0100 2011
+  Processing by OrdersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOrder Load (1.1ms)[0m  [1mSELECT "orders".* FROM "orders" WHERE "orders"."id" = 1 LIMIT 1[0m
+Rendered orders/show.html.erb within layouts/application (23.1ms)
+Completed 200 OK in 85ms (Views: 58.5ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/orderitems" for 127.0.0.1 at Fri Oct 28 00:07:33 +0100 2011
+  Processing by OrderitemsController#index as HTML
+  [1m[35mOrderitem Load (3.0ms)[0m  SELECT "orderitems".* FROM "orderitems"
+Rendered orderitems/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 85ms (Views: 53.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/orderitems/new" for 127.0.0.1 at Fri Oct 28 00:07:38 +0100 2011
+  Processing by OrderitemsController#new as HTML
+Rendered orderitems/_form.html.erb (22.4ms)
+Rendered orderitems/new.html.erb within layouts/application (39.0ms)
+Completed 200 OK in 95ms (Views: 78.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/orderitems" for 127.0.0.1 at Fri Oct 28 00:07:56 +0100 2011
+  Processing by OrderitemsController#create as HTML
+  Parameters: {"commit"=>"Create Orderitem", "orderitem"=>{"quantity"=>"1", "order_id"=>"1", "book_id"=>"1"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[36mAREL (3.4ms)[0m  [1mINSERT INTO "orderitems" ("quantity", "created_at", "book_id", "order_id", "updated_at") VALUES (1, '2011-10-27 23:07:56.228237', 1, 1, '2011-10-27 23:07:56.228237')[0m
+Redirected to http://0.0.0.0:3000/orderitems/1
+Completed 302 Found in 98ms
+
+
+Started GET "/orderitems/1" for 127.0.0.1 at Fri Oct 28 00:07:56 +0100 2011
+  Processing by OrderitemsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOrderitem Load (1.2ms)[0m  SELECT "orderitems".* FROM "orderitems" WHERE "orderitems"."id" = 1 LIMIT 1
+Rendered orderitems/show.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 79ms (Views: 53.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/orderitems" for 127.0.0.1 at Fri Oct 28 00:07:59 +0100 2011
+  Processing by OrderitemsController#index as HTML
+  [1m[36mOrderitem Load (9.4ms)[0m  [1mSELECT "orderitems".* FROM "orderitems"[0m
+Rendered orderitems/index.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 81ms (Views: 54.4ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/orderitems/new" for 127.0.0.1 at Fri Oct 28 00:08:01 +0100 2011
+  Processing by OrderitemsController#new as HTML
+Rendered orderitems/_form.html.erb (19.9ms)
+Rendered orderitems/new.html.erb within layouts/application (64.3ms)
+Completed 200 OK in 134ms (Views: 113.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/orderitems" for 127.0.0.1 at Fri Oct 28 00:08:17 +0100 2011
+  Processing by OrderitemsController#create as HTML
+  Parameters: {"commit"=>"Create Orderitem", "orderitem"=>{"quantity"=>"1", "order_id"=>"1", "book_id"=>"2"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (3.5ms)[0m  INSERT INTO "orderitems" ("book_id", "quantity", "updated_at", "order_id", "created_at") VALUES (2, 1, '2011-10-27 23:08:17.857605', 1, '2011-10-27 23:08:17.857605')
+Redirected to http://0.0.0.0:3000/orderitems/2
+Completed 302 Found in 226ms
+
+
+Started GET "/orderitems/2" for 127.0.0.1 at Fri Oct 28 00:08:18 +0100 2011
+  Processing by OrderitemsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mOrderitem Load (1.1ms)[0m  [1mSELECT "orderitems".* FROM "orderitems" WHERE "orderitems"."id" = 2 LIMIT 1[0m
+Rendered orderitems/show.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 92ms (Views: 67.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/orderitems" for 127.0.0.1 at Fri Oct 28 00:08:20 +0100 2011
+  Processing by OrderitemsController#index as HTML
+  [1m[35mOrderitem Load (10.7ms)[0m  SELECT "orderitems".* FROM "orderitems"
+Rendered orderitems/index.html.erb within layouts/application (26.3ms)
+Completed 200 OK in 107ms (Views: 66.0ms | ActiveRecord: 10.7ms)
+
+
+Started GET "/orderitems/new" for 127.0.0.1 at Fri Oct 28 00:08:23 +0100 2011
+  Processing by OrderitemsController#new as HTML
+Rendered orderitems/_form.html.erb (17.5ms)
+Rendered orderitems/new.html.erb within layouts/application (37.1ms)
+Completed 200 OK in 90ms (Views: 69.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/orderitems" for 127.0.0.1 at Fri Oct 28 00:08:33 +0100 2011
+  Processing by OrderitemsController#create as HTML
+  Parameters: {"commit"=>"Create Orderitem", "orderitem"=>{"quantity"=>"1", "order_id"=>"1", "book_id"=>"3"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[36mAREL (11.3ms)[0m  [1mINSERT INTO "orderitems" ("book_id", "updated_at", "created_at", "order_id", "quantity") VALUES (3, '2011-10-27 23:08:33.570893', '2011-10-27 23:08:33.570893', 1, 1)[0m
+Redirected to http://0.0.0.0:3000/orderitems/3
+Completed 302 Found in 125ms
+
+
+Started GET "/orderitems/3" for 127.0.0.1 at Fri Oct 28 00:08:33 +0100 2011
+  Processing by OrderitemsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mOrderitem Load (1.1ms)[0m  SELECT "orderitems".* FROM "orderitems" WHERE "orderitems"."id" = 3 LIMIT 1
+Rendered orderitems/show.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 73ms (Views: 48.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/orderitems" for 127.0.0.1 at Fri Oct 28 00:08:38 +0100 2011
+  Processing by OrderitemsController#index as HTML
+  [1m[36mOrderitem Load (3.5ms)[0m  [1mSELECT "orderitems".* FROM "orderitems"[0m
+Rendered orderitems/index.html.erb within layouts/application (25.7ms)
+Completed 200 OK in 86ms (Views: 60.2ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/categorys" for 127.0.0.1 at Fri Oct 28 00:11:06 +0100 2011
+
+ActionController::RoutingError (No route matches "/categorys"):
+  
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.9ms)
+
+
+Started GET "/category" for 127.0.0.1 at Fri Oct 28 00:11:12 +0100 2011
+
+ActionController::RoutingError (No route matches "/category"):
+  
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.8ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:11:25 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (3.6ms)[0m  SELECT "categories".* FROM "categories"
+Rendered categories/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 61ms (Views: 43.2ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:11:29 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (23.5ms)
+Rendered categories/new.html.erb within layouts/application (51.4ms)
+Completed 200 OK in 217ms (Views: 103.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:11:49 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"1"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[36mAREL (3.5ms)[0m  [1mINSERT INTO "categories" ("book_id", "created_at", "updated_at", "categoryName") VALUES (1, '2011-10-27 23:11:49.252034', '2011-10-27 23:11:49.252034', 'Programming')[0m
+Redirected to http://0.0.0.0:3000/categories/1
+Completed 302 Found in 124ms
+
+
+Started GET "/categories/1" for 127.0.0.1 at Fri Oct 28 00:11:49 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCategory Load (1.2ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = 1 LIMIT 1
+Rendered categories/show.html.erb within layouts/application (11.6ms)
+Completed 200 OK in 68ms (Views: 51.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:12:09 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (2.8ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+Rendered categories/index.html.erb within layouts/application (25.1ms)
+Completed 200 OK in 176ms (Views: 60.5ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:12:12 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (14.4ms)
+Rendered categories/new.html.erb within layouts/application (30.7ms)
+Completed 200 OK in 79ms (Views: 66.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:12:20 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"2"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (3.5ms)[0m  INSERT INTO "categories" ("book_id", "created_at", "categoryName", "updated_at") VALUES (2, '2011-10-27 23:12:20.272193', 'Programming', '2011-10-27 23:12:20.272193')
+Redirected to http://0.0.0.0:3000/categories/2
+Completed 302 Found in 145ms
+
+
+Started GET "/categories/2" for 127.0.0.1 at Fri Oct 28 00:12:20 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCategory Load (1.6ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 2 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (34.6ms)
+Completed 200 OK in 206ms (Views: 63.5ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:12:23 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (11.2ms)[0m  SELECT "categories".* FROM "categories"
+Rendered categories/index.html.erb within layouts/application (33.5ms)
+Completed 200 OK in 94ms (Views: 71.5ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:12:26 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (12.4ms)
+Rendered categories/new.html.erb within layouts/application (39.5ms)
+Completed 200 OK in 89ms (Views: 69.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:12:35 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"3"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[36mAREL (9.0ms)[0m  [1mINSERT INTO "categories" ("created_at", "categoryName", "updated_at", "book_id") VALUES ('2011-10-27 23:12:36.136181', 'Programming', '2011-10-27 23:12:36.136181', 3)[0m
+Redirected to http://0.0.0.0:3000/categories/3
+Completed 302 Found in 110ms
+
+
+Started GET "/categories/3" for 127.0.0.1 at Fri Oct 28 00:12:36 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mCategory Load (1.1ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = 3 LIMIT 1
+Rendered categories/show.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 74ms (Views: 46.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:12:40 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (9.3ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+Rendered categories/index.html.erb within layouts/application (27.3ms)
+Completed 200 OK in 95ms (Views: 70.9ms | ActiveRecord: 9.3ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:12:43 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (23.0ms)
+Rendered categories/new.html.erb within layouts/application (36.1ms)
+Completed 200 OK in 93ms (Views: 72.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:12:49 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"4"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (10.0ms)[0m  INSERT INTO "categories" ("created_at", "updated_at", "categoryName", "book_id") VALUES ('2011-10-27 23:12:50.001307', '2011-10-27 23:12:50.001307', 'Programming', 4)
+Redirected to http://0.0.0.0:3000/categories/4
+Completed 302 Found in 129ms
+
+
+Started GET "/categories/4" for 127.0.0.1 at Fri Oct 28 00:12:50 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mCategory Load (8.9ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 4 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (16.1ms)
+Completed 200 OK in 99ms (Views: 60.6ms | ActiveRecord: 12.4ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:12:50 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"4"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (6.3ms)[0m  INSERT INTO "categories" ("updated_at", "book_id", "categoryName", "created_at") VALUES ('2011-10-27 23:12:50.884653', 4, 'Programming', '2011-10-27 23:12:50.884653')
+Redirected to http://0.0.0.0:3000/categories/5
+Completed 302 Found in 239ms
+
+
+Started GET "/categories/5" for 127.0.0.1 at Fri Oct 28 00:12:51 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCategory Load (1.3ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 5 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 79ms (Views: 64.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:12:54 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (2.7ms)[0m  SELECT "categories".* FROM "categories"
+Rendered categories/index.html.erb within layouts/application (38.8ms)
+Completed 200 OK in 95ms (Views: 82.5ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/categories/5" for 127.0.0.1 at Fri Oct 28 00:13:01 +0100 2011
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "id"=>"5"}
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 5 LIMIT 1[0m
+  [1m[35mAREL (5.3ms)[0m  DELETE FROM "categories" WHERE "categories"."id" = 5
+Redirected to http://0.0.0.0:3000/categories
+Completed 302 Found in 247ms
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:13:02 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (18.1ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+Rendered categories/index.html.erb within layouts/application (73.3ms)
+Completed 200 OK in 190ms (Views: 143.4ms | ActiveRecord: 27.9ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:13:04 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (23.9ms)
+Rendered categories/new.html.erb within layouts/application (42.8ms)
+Completed 200 OK in 104ms (Views: 92.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:13:15 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"5"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (3.2ms)[0m  INSERT INTO "categories" ("book_id", "categoryName", "updated_at", "created_at") VALUES (5, 'Programming', '2011-10-27 23:13:15.348087', '2011-10-27 23:13:15.348087')
+Redirected to http://0.0.0.0:3000/categories/6
+Completed 302 Found in 107ms
+
+
+Started GET "/categories/6" for 127.0.0.1 at Fri Oct 28 00:13:15 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mCategory Load (8.3ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 6 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 83ms (Views: 60.2ms | ActiveRecord: 17.3ms)
+
+
+Started GET "/categories/6/edit" for 127.0.0.1 at Fri Oct 28 00:22:02 +0100 2011
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mCategory Load (1.0ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = 6 LIMIT 1
+Rendered categories/_form.html.erb (15.1ms)
+Rendered categories/edit.html.erb within layouts/application (31.3ms)
+Completed 200 OK in 94ms (Views: 66.1ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/categories/6" for 127.0.0.1 at Fri Oct 28 00:24:10 +0100 2011
+  Processing by CategoriesController#update as HTML
+  Parameters: {"commit"=>"Update Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"6"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓", "id"=>"6"}
+  [1m[36mCategory Load (1.1ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 6 LIMIT 1[0m
+  [1m[35mAREL (10.5ms)[0m  UPDATE "categories" SET "updated_at" = '2011-10-27 23:24:11.026889', "book_id" = 6 WHERE "categories"."id" = 6
+Redirected to http://0.0.0.0:3000/categories/6
+Completed 302 Found in 118ms
+
+
+Started GET "/categories/6" for 127.0.0.1 at Fri Oct 28 00:24:11 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mCategory Load (1.3ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 6 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 73ms (Views: 58.2ms | ActiveRecord: 12.9ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:24:22 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (2.5ms)[0m  SELECT "categories".* FROM "categories"
+Rendered categories/index.html.erb within layouts/application (34.2ms)
+Completed 200 OK in 94ms (Views: 71.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:24:28 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (14.9ms)
+Rendered categories/new.html.erb within layouts/application (28.7ms)
+Completed 200 OK in 80ms (Views: 68.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:24:46 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"7"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[36mAREL (4.1ms)[0m  [1mINSERT INTO "categories" ("updated_at", "book_id", "created_at", "categoryName") VALUES ('2011-10-27 23:24:46.200778', 7, '2011-10-27 23:24:46.200778', 'Programming')[0m
+Redirected to http://0.0.0.0:3000/categories/7
+Completed 302 Found in 114ms
+
+
+Started GET "/categories/7" for 127.0.0.1 at Fri Oct 28 00:24:46 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mCategory Load (1.0ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = 7 LIMIT 1
+Rendered categories/show.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 78ms (Views: 53.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:24:48 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (3.0ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+Rendered categories/index.html.erb within layouts/application (32.8ms)
+Completed 200 OK in 107ms (Views: 79.3ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:24:51 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (29.8ms)
+Rendered categories/new.html.erb within layouts/application (48.5ms)
+Completed 200 OK in 109ms (Views: 94.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:24:59 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"8"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (5.2ms)[0m  INSERT INTO "categories" ("categoryName", "created_at", "book_id", "updated_at") VALUES ('Programming', '2011-10-27 23:25:00.080311', 8, '2011-10-27 23:25:00.080311')
+Redirected to http://0.0.0.0:3000/categories/8
+Completed 302 Found in 117ms
+
+
+Started GET "/categories/8" for 127.0.0.1 at Fri Oct 28 00:25:00 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 8 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (31.5ms)
+Completed 200 OK in 86ms (Views: 69.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:25:02 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (3.5ms)[0m  SELECT "categories".* FROM "categories"
+Rendered categories/index.html.erb within layouts/application (32.8ms)
+Completed 200 OK in 93ms (Views: 75.3ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:25:06 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (125.8ms)
+Rendered categories/new.html.erb within layouts/application (147.0ms)
+Completed 200 OK in 205ms (Views: 184.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:25:14 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"9"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[36mAREL (9.3ms)[0m  [1mINSERT INTO "categories" ("book_id", "updated_at", "created_at", "categoryName") VALUES (9, '2011-10-27 23:25:14.757252', '2011-10-27 23:25:14.757252', 'Programming')[0m
+Redirected to http://0.0.0.0:3000/categories/9
+Completed 302 Found in 112ms
+
+
+Started GET "/categories/9" for 127.0.0.1 at Fri Oct 28 00:25:14 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[35mCategory Load (0.9ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = 9 LIMIT 1
+Rendered categories/show.html.erb within layouts/application (20.4ms)
+Completed 200 OK in 81ms (Views: 63.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:25:18 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (2.5ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+Rendered categories/index.html.erb within layouts/application (144.1ms)
+Completed 200 OK in 219ms (Views: 176.0ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/categories/new" for 127.0.0.1 at Fri Oct 28 00:25:21 +0100 2011
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.erb (16.0ms)
+Rendered categories/new.html.erb within layouts/application (45.5ms)
+Completed 200 OK in 101ms (Views: 79.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/categories" for 127.0.0.1 at Fri Oct 28 00:25:30 +0100 2011
+  Processing by CategoriesController#create as HTML
+  Parameters: {"commit"=>"Create Category", "category"=>{"categoryName"=>"Programming", "book_id"=>"10"}, "authenticity_token"=>"+i0gHvF/RPhhsVn5tvOrSd8xb6RIgISPRCz6ws769Bc=", "utf8"=>"✓"}
+  [1m[35mAREL (7.8ms)[0m  INSERT INTO "categories" ("categoryName", "created_at", "book_id", "updated_at") VALUES ('Programming', '2011-10-27 23:25:30.337957', 10, '2011-10-27 23:25:30.337957')
+Redirected to http://0.0.0.0:3000/categories/10
+Completed 302 Found in 117ms
+
+
+Started GET "/categories/10" for 127.0.0.1 at Fri Oct 28 00:25:30 +0100 2011
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mCategory Load (1.7ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE "categories"."id" = 10 LIMIT 1[0m
+Rendered categories/show.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 177ms (Views: 157.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/categories" for 127.0.0.1 at Fri Oct 28 00:27:28 +0100 2011
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (3.2ms)[0m  SELECT "categories".* FROM "categories"
+Rendered categories/index.html.erb within layouts/application (41.6ms)
+Completed 200 OK in 97ms (Views: 82.3ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:27:35 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (5.7ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (165.7ms)
+Completed 200 OK in 261ms (Views: 207.1ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/books/" for 127.0.0.1 at Fri Oct 28 00:43:30 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (3.5ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (80.0ms)
+Completed 200 OK in 147ms (Views: 118.1ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/books/" for 127.0.0.1 at Fri Oct 28 00:44:38 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (11.9ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 500 Internal Server Error in 52ms
+
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_trace.erb (107.4ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (63.7ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (188.1ms)
+
+
+Started GET "/books/" for 127.0.0.1 at Fri Oct 28 00:44:39 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (9.2ms)[0m  SELECT "books".* FROM "books"
+Completed 500 Internal Server Error in 42ms
+
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.7ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (39.3ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (63.0ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:45:04 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (11.8ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 500 Internal Server Error in 31ms
+
+ArgumentError (respond_to takes either types or a block, never both):
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (167.9ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (216.3ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:46:00 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (11.0ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (51.1ms)
+Completed 200 OK in 118ms (Views: 88.8ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:46:19 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (4.2ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 406 Not Acceptable in 34ms
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:46:46 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (4.3ms)[0m  SELECT "books".* FROM "books"
+Completed 406 Not Acceptable in 22ms
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 00:48:29 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (3.7ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 406 Not Acceptable in 123ms
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:20:51 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (3.5ms)[0m  SELECT "books".* FROM "books"
+Completed 500 Internal Server Error in 48ms
+
+ActionView::MissingTemplate (Missing partial users/show.json with {:locale=>[:en, :en], :formats=>[:html], :handlers=>[:rxml, :builder, :erb, :rjs, :rhtml]} in view paths "/home/lvl9/Apps/OnlineBookStore/app/views"):
+  app/controllers/books_controller.rb:11:in `index'
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (1.0ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:21:46 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (8.6ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 500 Internal Server Error in 33ms
+
+ActionView::MissingTemplate (Missing partial users/show.json with {:locale=>[:en, :en], :formats=>[:html], :handlers=>[:rxml, :builder, :erb, :rjs, :rhtml]} in view paths "/home/lvl9/Apps/OnlineBookStore/app/views"):
+  app/controllers/books_controller.rb:11:in `index'
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (1.0ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:23:06 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (6.5ms)[0m  SELECT "books".* FROM "books"
+Completed 500 Internal Server Error in 38ms
+
+ActionView::MissingTemplate (Missing partial books/show.json with {:locale=>[:en, :en], :formats=>[:html], :handlers=>[:rxml, :builder, :erb, :rjs, :rhtml]} in view paths "/home/lvl9/Apps/OnlineBookStore/app/views"):
+  app/controllers/books_controller.rb:11:in `index'
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (1.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:23:15 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (3.4ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 500 Internal Server Error in 36ms
+
+ActionView::MissingTemplate (Missing partial book/show.json with {:locale=>[:en, :en], :formats=>[:html], :handlers=>[:rxml, :builder, :erb, :rjs, :rhtml]} in view paths "/home/lvl9/Apps/OnlineBookStore/app/views"):
+  app/controllers/books_controller.rb:11:in `index'
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (1.2ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:24:58 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (3.6ms)[0m  SELECT "books".* FROM "books"
+Rendered books/_json.json.erb (0.7ms)
+Completed 500 Internal Server Error in 146ms
+
+ArgumentError (wrong number of arguments (2 for 1)):
+  app/controllers/books_controller.rb:11:in `index'
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.3ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (36.1ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (56.3ms)
+
+
+Started GET "/books/json" for 127.0.0.1 at Fri Oct 28 11:25:17 +0100 2011
+  Processing by BooksController#show as HTML
+  Parameters: {"id"=>"json"}
+  [1m[36mBook Load (1.7ms)[0m  [1mSELECT "books".* FROM "books" WHERE "books"."id" = 0 LIMIT 1[0m
+Completed 404 Not Found in 34ms
+
+ActiveRecord::RecordNotFound (Couldn't find Book with ID=json):
+  app/controllers/books_controller.rb:18:in `show'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.4ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.8ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (32.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:25:35 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (4.2ms)[0m  SELECT "books".* FROM "books"
+Rendered books/_json.json.erb (0.7ms)
+Completed 500 Internal Server Error in 60ms
+
+ArgumentError (wrong number of arguments (2 for 1)):
+  app/controllers/books_controller.rb:11:in `index'
+  app/controllers/books_controller.rb:8:in `index'
+
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_trace.erb (8.4ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (40.0ms)
+Rendered /var/lib/gems/1.8/gems/actionpack-3.0.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (66.7ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:28:23 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (4.1ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 406 Not Acceptable in 19ms
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:29:16 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (8.1ms)[0m  SELECT "books".* FROM "books"
+Completed 406 Not Acceptable in 22ms
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:35:28 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (4.3ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 406 Not Acceptable in 24ms
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:37:22 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (8.8ms)[0m  SELECT "books".* FROM "books"
+Completed 406 Not Acceptable in 48ms
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from service at /usr/lib/ruby/1.8/webrick/httpserver.rb:104)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:45:44 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (3.6ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (54.6ms)
+Completed 200 OK in 205ms (Views: 82.4ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 11:57:40 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (1.3ms)[0m  SELECT "books".* FROM "books"
+Completed 406 Not Acceptable in 198ms (Views: 161.9ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 12:00:06 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (1.8ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Completed 406 Not Acceptable in 74ms (Views: 43.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 12:28:07 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (1.3ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (72.6ms)
+Completed 200 OK in 106ms (Views: 85.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 12:28:12 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[36mBook Load (1.5ms)[0m  [1mSELECT "books".* FROM "books"[0m
+Rendered books/index.html.erb within layouts/application (60.7ms)
+Completed 200 OK in 193ms (Views: 170.7ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/books" for 127.0.0.1 at Fri Oct 28 12:29:02 +0100 2011
+  Processing by BooksController#index as HTML
+  [1m[35mBook Load (1.6ms)[0m  SELECT "books".* FROM "books"
+Rendered books/index.html.erb within layouts/application (59.6ms)
+Completed 200 OK in 93ms (Views: 67.9ms | ActiveRecord: 1.6ms)

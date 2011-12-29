@@ -1,0 +1,29 @@
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Password</th>
+    <th>Address</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @customers.each do |customer| %>
+  <tr>
+    <td><%= customer.firstname %></td>
+    <td><%= customer.lastname %></td>
+    <td><%= customer.email %></td>
+    <td><%= customer.phone %></td>
+    <td><%= customer.password %></td>
+    <td><%= customer.address_id %></td>
+    <td><%= link_to 'Edit', edit_customer_path(customer), :remote => true %></td>
+    <td><%= link_to 'Destroy', customer, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+
+      <title>Customers Books Data-Access</title>
+
+        <script src="/javascripts/jquery.js?1323855673"      type="text/javascript"></script>
+        <script src="/javascripts/jquery-ui.js?1323855673"   type="text/javascript"></script>
+        <script src="/javascripts/jquery_ujs.js?1323855673"  type="text/javascript"></script>
+        <script src="/javascripts/application.js?1323327452" type="text/javascript"></script>
+
+      <script type="text/javascript">
+
+         // The following 2 Routines get and List Customer Details using a $.getJSON JQuery call.
+
+         $(document).ready(function() {
+
+            $('#getcusts-button').live('click', function() {
+
+                
+                
+                //alert("Getting JSON data for Customers");
+
+                $.getJSON('http://localhost:3000/getcustsjson', function(custdata) { 
+                                                         
+                   HandleGetJSONResponse(custdata);
+                        
+                });          // getJSON end
+            });              // getdata-button end
+         });                 // document.ready end
+
+
+         function HandleGetJSONResponse(custdata) {
+
+           // Clear out any old data from tablist div
+
+           $('#tablist').html('');
+
+           // Generate Customers HTML table.
+
+           var tmp = '<table border=1>';
+
+             var tmp = tmp + '<tr>';
+               var tmp = tmp + '<th>Cust. Id.</th>';
+               var tmp = tmp + '<th>First Name</th>';
+               var tmp = tmp + '<th>Last Name</th>';
+               var tmp = tmp + '<th>Email</th>';
+               var tmp = tmp + '<th>Phone</th>'
+             var tmp = tmp + '</tr>';
+
+             for (i = 0; i < custdata.length; i++) {
+               tmp = tmp + '<tr>';
+                 tmp = tmp + '<td><a href=# id="getbooks-button">' + custdata[i].customer.id  + '</a></td>';
+                 tmp = tmp + '<td>' + custdata[i].customer.firstname         + '</td>';
+                 tmp = tmp + '<td>' + custdata[i].customer.lastname          + '</td>';
+                 tmp = tmp + '<td>' + custdata[i].customer.email             + '</td>';
+                 tmp = tmp + '<td>' + custdata[i].customer.phone             + '</td>';
+               tmp = tmp + '</tr>';
+             }
+
+             tmp = tmp + '</table>';
+
+            // alert('About to insert Customer data into DOM: ');
+
+             // Insert Customers HTML table into DOM.
+
+             $('#tablist').html(tmp);
+        }
+
+
+        
+        // The following two Routines get Books Details for a Customer using the $.ajax JQuery call.
+       
+        $(document).ready(function() {
+
+            $('#getbooks-button').live('click', function() {
+                customerid = this.text
+
+                
+ 
+               // alert("Getting JSON Books data");
+
+                $.ajax({
+                    dataType: 'json',
+                    type: 'GET',
+                    url: 'http://localhost:3000/getbooksjson/' + customerid,
+                    success: function(bookdata) {
+
+                        console.log(bookdata);
+
+                        //alert('Processing returned JSON Books data');
+
+                        HandleAjaxResponse(bookdata);
+                        
+                    },
+
+                    error: function(response) {
+                    alert('There was an error, status of : ' + response.status);
+                    }
+
+                }); // ajax end
+            });     // getdata-button end
+        });         // document.ready end
+
+
+        function HandleAjaxResponse(bookdata) {
+
+         // clear out any old data from tablist div.
+              
+         $('#tablist').html('');
+
+         // Generate Books Table HTML.
+
+         var tmp = '<table border=1>';
+          var tmp = tmp + '<tr>';
+          var tmp = tmp + '<th>Book Price</th>';
+          var tmp = tmp + '<th>Title</th>';
+          var tmp = tmp + '<th>Author</th>';
+          var tmp = tmp + '<th>ISBN</th>';
+          var tmp = tmp + '<th>Published</th>';
+          var tmp = tmp + '<th>Publisher</th>';
+          var tmp = tmp + '<th>Edition</th>';
+          var tmp = tmp + '</tr>';
+
+          for (i = 0; i < bookdata.length; i++) {
+             tmp = tmp + '<tr>';
+               tmp = tmp + '<td><a href=# id="viewbook-button">' + bookdata[i].book.ISBN          + '</a></td>';             
+               tmp = tmp + '<td>' + bookdata[i].book.title         + '</td>';
+               tmp = tmp + '<td>' + bookdata[i].book.author        + '</td>';              
+               tmp = tmp + '<td>' + bookdata[i].book.yearPublished + '</td>';
+               tmp = tmp + '<td>' + bookdata[i].book.publisher     + '</td>';
+               tmp = tmp + '<td>' + bookdata[i].book.edition       + '</td>';
+               tmp = tmp + '<td>' + bookdata[i].book.price         + '</td>';
+             tmp = tmp + '</tr>';
+          }
+             tmp = tmp + '</table>';
+
+             //alert('About to insert Books data into DOM: ');
+
+             // Insert Books Table HTML into DOM.
+
+             $('#tablist').html(tmp);
+        }
+
+
+        // The following two Routines get a Book's details from Google using a JSONP request
+        // The ISBN code is got from clicking the viewbook-button.
+        // The handleJSONPResponse function is invoked to process the returned data from Google Books.
+
+        $(document).ready(function() {
+
+            $('#viewbook-button').live('click', function() {
+              isbnCode = this.text;
+
+              //alert("Getting JSONP Google Books data");
+            
+              //isbnCode = "0451526538";
+ 
+              URLstr = 'https://www.googleapis.com/books/v1/volumes?q=ISBN' + isbnCode + '&callback=HandleJSONPResponse';
+
+              //alert("un-Escaped url string" + URLstr);
+
+              JSONPstr = '<script src="' + URLstr + '"></' + 'script' + '>';
+
+              //alert(" un-Escaped JSONP string = " + JSONPstr);
+              
+              escJSONPstr = escape(JSONPstr);
+
+              //alert(" Escaped JSONP string = " + escJSONPstr);
+
+              // Insert the script into the div.
+              // This will cause the handleJSONPResponse function to execute when the script is dynamically loadedinto div.
+              // The data wrapped in a function call will be returned from the Google Books server.
+              // This will cause the handleJSONPResponse function to execute below.
+
+
+              $('#jsonp-call').html(JSONPstr);
+
+            
+            });   // end viewbook-button
+         });      // end document.ready
+
+
+         function HandleJSONPResponse(googdata) {
+         
+           //  Set up single item hash for data from Google
+           
+           var bookinfo = googdata.items[0];
+
+           // Clear out any old data from tablist div
+
+           $('#tablist').html('');
+
+           // Set up HTML for Google data.
+
+           var tmp = ""
+           tmp = '<h3>Book Information Retrieved from Google Books</h3>';
+           tmp = tmp + '</br>';
+           tmp = tmp + '<p><b>        Title  : </b>'      + bookinfo.volumeInfo.title                + '</p>';
+           tmp = tmp + '<p><b>    Author(s)  : </b>'      + bookinfo.volumeInfo.authors              + '</p>';
+           tmp = tmp + '<p><b>    Publisher  : </b>'      + bookinfo.volumeInfo.publisher            + '</p>';
+           tmp = tmp + '<p><b>    Published  : </b>'      + bookinfo.volumeInfo.publishedDate        + '</p>';
+           tmp = tmp + '<p><b>     No.Pages  : </b>'      + bookinfo.volumeInfo.pageCount            + '</p>';
+           tmp = tmp + '<p><b>   Categories  : </b>'      + bookinfo.volumeInfo.categories           + '</p>';
+           tmp = tmp + '</br>';
+           tmp = tmp + '<p><b>   Preview Link</b></p>';
+           tmp = tmp + '<p><a href="' + bookinfo.volumeInfo.previewLink + '">' + bookinfo.volumeInfo.previewLink + '</a></p>';
+           
+           
+          
+           // Insert Customers HTML table into DOM.
+
+           // alert('About to insert Google data into DOM: ');
+
+           $('#tablist').html(tmp); 
+              
+         };
+          
+          
+  </script>
+    
+    
+  </head>
+
+  <body> 
+    <h2>Show Details of Books Ordered by a Customer</h2>
+    <a href="#" id="getcusts-button">Get Customer Details</a>
+    <br/><br/>
+    <div id="tablist">Tables will be Listed Here</div>
+    <br/><br/>
+    <div id="jsonp-call">The JSONP generated src= statement will go here and execute</div>
+ 
+  </body>
+</html>
+

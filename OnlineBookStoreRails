@@ -1,0 +1,6 @@
+rails generate scaffold customer firstname:string lastname:string email:string phone:string password:string address_id:integer  
+rails generate scaffold address address1:string address2:string town:string county:string country:string 
+rails generate scaffold order customer_id:Integer salesTax:decimal shippingFee:decimal total:decimal methodOfPayment:string
+rails generate scaffold orderitems order_id:integer book_id:integer quantity:integer
+rails generate scaffold book title:string author:string publisher:string yearPublished:string edition:string volume:string ISBN:string price:decimal
+rails generate scaffold categories book_id:integer categoryName:string

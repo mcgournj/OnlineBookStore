@@ -1,0 +1,5 @@
+editform = "";
+editform = editform + '<%= escape_javascript( render('form') ) %>';
+alert(" unEscaped editform : " + editform);
+$("#customer_form").html(editform);
+

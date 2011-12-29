@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  customer_id: 
+  salesTax: 9.99
+  shippingFee: 9.99
+  total: 9.99
+  methodOfPayment: MyString
+
+two:
+  customer_id: 
+  salesTax: 9.99
+  shippingFee: 9.99
+  total: 9.99
+  methodOfPayment: MyString

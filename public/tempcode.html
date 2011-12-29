@@ -1,0 +1,26 @@
+
+                  var tmp = '<table border=1>';
+
+                  for (i=0;i<data.length;i++)
+                  {
+                    tmp = tmp +'<tr>';
+                      tmp = tmp + '<td>' + data[i].book.price         + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.title         + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.author        + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.ISBN          + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.yearPublished + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.volume        + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.publisher     + '</td>';
+                      tmp = tmp + '<td>' + data[i].book.edition       + '</td>';
+                      tmp = tmp + '<td><a href=# onclick=\"alert('+ i +')\">View</a></td>'; 
+                    tmp = tmp + '</tr>';
+                  }
+
+                  tmp = tmp + '</table>';
+
+                  alert('Contents of Table: ' + tmp)
+
+                  alert('About to insert Table into DOM in content Div')
+
+                  $('#content').html(tmp);
+

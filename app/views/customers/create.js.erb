@@ -1,0 +1,45 @@
+
+<% if @customer.errors.any? -%> 
+
+   /* Hide the Flash Notice div */
+   /* Create an Errors List */
+   /* Update the html of the customer_errors div with the Errors List */
+   /* Show the customer_errors div */
+
+   $("#flash_notice").hide(300);
+
+  
+   var errlst = "";
+   errlst = errlst + "<ul>";
+   <% @customer.errors.full_messages.each do |msg| %>
+     errlst = errlst + "<li><%= escape_javascript(msg) %></li>";
+   <% end %>
+   errlst = errlst + "</ul>";
+
+   alert("Errors List : " + errlst);
+
+   $("#customer_errors").html(errlst);
+   $("#customer_errors").show(300);
+
+<% else -%>
+
+   /* Hide the customer_errors div */
+   /* Update the html of the flash_notice div with the Flash contents */
+   /* Clear the form */
+   /* Set form to Create Customer mode */
+   /* Replace the html of the customers_list div with the updated Customers List  */
+
+   $("#customer_errors").hide(300);  
+   $("#flash_notice").html("<%= flash[:notice] %>");   
+   $("#flash_notice").show(300);
+
+   $(":input:not(input[type=submit])").val("");
+   $(":submit").attr("value", "Create Customer");
+   $("form").attr({id:"new_customer", action:"/customers"});
+  
+   $("#customers_list").html("<%=  escape_javascript render('customers') %>");
+
+   <% end %>
+
+
+

@@ -1,0 +1,16 @@
+
+/* hide customer_errors div */
+/* show flash notice */
+/* Set form to Create Customer mode */
+/* send script to update customers_list div with new customers list */
+
+$("#customer_errors").hide(300);
+$("#flash_notice").html("<%= flash[:notice] %>");
+$("#flash_notice").show(300);
+
+$(":input:not(input[type=submit])").val("");
+$(":submit").attr("value", "Create Customer");
+$("form").attr({id:"new_customer", action:"/customers"});
+ 
+$("#customers_list").html("<%= escape_javascript render('customers') %>");
+
